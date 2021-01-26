@@ -13,11 +13,21 @@ const SearchFoodDishes = () => {
             fetch(getApiUrl(query))
             .then(data => data.json())
             .then(res => setHits(res.hits))
-            .catch(error => console.log(error));
+            .catch(error => console.error(error));
     };
 
     return(
-        
+        <Fragment>
+            <div className="root">
+                <Grid container spacing={3} justify="center">
+                    <AnyFoodDishes/>
+                    <PredefinedFoodDishes 
+                        getData={getData}
+                        setHits={setHits}/>
+                </Grid>
+            </div>
+            {hits && <FoodDishes hits={hits}/>}
+        </Fragment>
     );
 };
 
